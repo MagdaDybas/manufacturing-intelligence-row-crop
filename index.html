@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Manufacturing Intelligence — Row Crop (prototype)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <div class="app" id="app">
+      <header class="topbar" role="banner">
+        <div class="topbar-left">
+          <button type="button" class="icon-btn topbar-icon" id="navToggle" aria-label="Toggle navigation" aria-expanded="true" aria-controls="sideNav">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">G</span>
+            <div class="brand-text">
+              <span class="brand-name">Manufacturing Intelligence</span>
+              <span class="brand-sub">Bayer Manufacturing · prototype</span>
+            </div>
+          </div>
+
+          <div class="area-switch" role="group" aria-label="Business area">
+            <button type="button" class="area-btn is-active" id="areaRowCrop" aria-pressed="true">
+              Row Crop
+            </button>
+            <button
+              type="button"
+              class="area-btn is-disabled"
+              id="areaCropProtection"
+              aria-pressed="false"
+              aria-describedby="cpTooltip"
+            >
+              Crop Protection
+              <span class="coming-soon">Coming soon</span>
+            </button>
+            <div class="tooltip" id="cpTooltip" role="tooltip" hidden>
+              Crop Protection will use separate data sources and workflows.
+              It is not available in this release. Contact your product owner for timeline.
+            </div>
+          </div>
+        </div>
+
+        <span class="env-badge" title="Non-production environment — sample data only">Non Prod</span>
+
+        <div class="topbar-right">
+          <button type="button" class="icon-btn topbar-icon" id="globalSearchBtn" aria-label="Search" title="Search (placeholder)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="M16 16l4 4" /></svg>
+          </button>
+          <button type="button" class="icon-btn topbar-icon" aria-label="Notifications" title="3 unread (sample)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16v-5a6 6 0 1112 0v5l1.5 2H4.5L6 16z" /><path d="M10 19a2 2 0 004 0" /></svg>
+            <span class="notif-dot" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="icon-btn topbar-icon" id="helpBtn" aria-label="Help and design notes" title="Help & design notes">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M9.8 9.6a2.4 2.4 0 114.2 1.6c-.7.7-1.5 1.1-1.5 2.3" /><circle cx="12" cy="16.6" r="0.8" fill="currentColor" stroke="none" /></svg>
+          </button>
+          <button type="button" class="avatar" aria-label="User profile">MA</button>
+        </div>
+      </header>
+
+      <div class="body">
+        <nav class="side-nav" id="sideNav" aria-label="Primary">
+          <ul class="nav-list">
+            <li>
+              <button type="button" class="nav-item is-active" data-route="overview" aria-current="page">
+                <span class="nav-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 11.5L12 5l8 6.5V20H4z" /><path d="M10 20v-6h4v6" /></svg>
+                </span>
+                Overview
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item" data-route="process" data-stage="receiving">
+                <span class="nav-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1" /><rect x="14" y="4" width="6" height="6" rx="1" /><rect x="4" y="14" width="6" height="6" rx="1" /><rect x="14" y="14" width="6" height="6" rx="1" /></svg>
+                </span>
+                Process Dashboards
+              </button>
+              <ul class="nav-sub" id="stageNav" hidden>
+                <li><button type="button" class="nav-sub-item is-active" data-route="process" data-stage="receiving">Receiving</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="process" data-stage="shelling">Shelling</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="process" data-stage="sizing">Sizing</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="process" data-stage="packaging">Packaging</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="process" data-stage="bag-printing">Bag Printing Line</button></li>
+              </ul>
+            </li>
+            <li>
+              <button type="button" class="nav-item" data-route="reports" data-cp="drying-shelling">
+                <span class="nav-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M6 4h9l5 5v11a1 1 0 01-1 1H6a1 1 0 01-1-1V5a1 1 0 011-1z" /><path d="M14 4v5h5" /><path d="M8 13h8M8 17h5" /></svg>
+                </span>
+                Reports (C&amp;P)
+              </button>
+              <ul class="nav-sub" id="cpNav" hidden>
+                <li><button type="button" class="nav-sub-item" data-route="reports" data-cp="drying-shelling">Drying &amp; Shelling C&amp;P</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="reports" data-cp="sizing">Sizing C&amp;P</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="reports" data-cp="packaging">Packaging C&amp;P</button></li>
+              </ul>
+            </li>
+            <li>
+              <button type="button" class="nav-item" data-route="apl" data-apl="samples-ready">
+                <span class="nav-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 18h16M6 18V8l4-4h4l4 4v10" /><path d="M9 18v-5h6v5" /></svg>
+                </span>
+                APL Tracking
+              </button>
+              <ul class="nav-sub" id="aplNav" hidden>
+                <li><button type="button" class="nav-sub-item" data-route="apl" data-apl="samples-ready">Samples Ready to be Planted</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="apl" data-apl="planting-by-day">Planting By Day</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="apl" data-apl="event-page">Event Page</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="apl" data-apl="handling-unit-list">Handling Unit List</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="apl" data-apl="global-stops">Global Stops</button></li>
+                <li><button type="button" class="nav-sub-item" data-route="apl" data-apl="apl-vs-manual">APL VS Manual</button></li>
+              </ul>
+            </li>
+            <li>
+              <button type="button" class="nav-item" data-route="my-dashboards">
+                <span class="nav-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 5h7v7H4zM13 5h7v4h-7zM13 11h7v8h-7zM4 14h7v5H4z" /></svg>
+                </span>
+                My Dashboards
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item" data-route="ai">
+                <span class="nav-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12 3l1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3z" /><path d="M18 14l.7 2.1L21 17l-2.3.7L18 20l-.7-2.3L15 17l2.3-.7L18 14z" /></svg>
+                </span>
+                AI Assistant
+              </button>
+            </li>
+          </ul>
+
+          <div class="nav-footer">
+            <p class="nav-section-label">Hypothesis</p>
+            <button type="button" class="nav-notes-btn" id="openNotesFromNav">
+              IA assumptions to validate
+            </button>
+            <p class="nav-hint">Navigation is a working hypothesis — not validated with users.</p>
+          </div>
+        </nav>
+
+        <div class="workspace">
+          <div class="filter-bar" id="filterBar" role="region" aria-label="Dashboard filters">
+            <div class="filter-fields" id="filterFields">
+              <!-- Filled by app.js from PEY per-dashboard filter sets -->
+            </div>
+            <div class="filter-actions">
+              <div class="applied-chips" id="appliedChips" aria-live="polite"></div>
+              <button type="button" class="btn btn-ghost" id="resetFilters">Reset filters</button>
+              <button type="button" class="btn btn-secondary" id="saveFilters" title="Future: saved filter sets">Save set</button>
+            </div>
+            <p class="filter-hint" id="filterHint"></p>
+          </div>
+
+          <div class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></div>
+
+          <main class="main" id="main" tabindex="-1">
+            <!-- views rendered by app.js -->
+          </main>
+        </div>
+      </div>
+
+      <button type="button" class="ai-fab" id="aiFab" aria-label="Open AI Assistant">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3z" /><path d="M18 14l.7 2.1L21 17l-2.3.7L18 20l-.7-2.3L15 17l2.3-.7L18 14z" /></svg>
+        <span>Ask AI</span>
+      </button>
+    </div>
+
+    <!-- Crop Protection empty state dialog -->
+    <div class="modal" id="cpModal" hidden role="dialog" aria-modal="true" aria-labelledby="cpModalTitle">
+      <div class="modal-backdrop" data-close="cpModal"></div>
+      <div class="modal-panel">
+        <h2 id="cpModalTitle">Crop Protection — Coming soon</h2>
+        <p>
+          Crop Protection will consolidate separate manufacturing data sources and user groups.
+          This prototype covers <strong>Row Crop</strong> only.
+        </p>
+        <p class="muted">Assumption to validate: users with access to only one business area should not see an enabled switch, or should see a clear entitlement message.</p>
+        <button type="button" class="btn btn-primary" data-close="cpModal">Stay in Row Crop</button>
+      </div>
+    </div>
+
+    <!-- Design notes / IA assumptions -->
+    <div class="drawer" id="notesDrawer" hidden>
+      <div class="drawer-backdrop" data-close="notesDrawer"></div>
+      <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="notesTitle">
+        <header class="drawer-header">
+          <h2 id="notesTitle">Design notes &amp; research backlog</h2>
+          <button type="button" class="icon-btn drawer-close" data-close="notesDrawer" aria-label="Close">×</button>
+        </header>
+        <div class="drawer-body" id="notesBody">
+          <!-- filled by app.js -->
+        </div>
+      </aside>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
